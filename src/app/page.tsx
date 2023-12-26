@@ -4,12 +4,13 @@ import SearchBar from './components/Searchbar.js'
 import Footer from './components/Footer.js'
 
 
+
 export default function Home() {
   
   return (
     <>
      <Navbar />
-     <SearchBar/>
+     <SearchBar initialData={[]}/>
      <Footer/>
     </>
   )

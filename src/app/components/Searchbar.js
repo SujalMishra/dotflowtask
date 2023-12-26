@@ -6,16 +6,14 @@ import RedditData from './RedditData';
 
 const API_KEY = "147288a8becf4488a4a05fe63341b2d6"
 
-function Searchbar() {
+function Searchbar({initialData}) {
   
     const [searchQuery, setSearchQuery] = useState('');
-    const [newsApiData, setNewsApiData] = useState([]);
+    const [newsApiData, setNewsApiData] = useState(initialData || []);
     const [loading, setLoading] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    useEffect(() => {
-    }, [])
     const filterByDateRange = async () => {
         setLoading(true);
         try {
@@ -151,11 +149,32 @@ function Searchbar() {
   
   }
 </div>
-
-
-
 </>
   )
 }
+
+export async function getServerSideProps() {
+  try {
+    // Fetch initial data from the NewsAPI during server-side rendering
+    const res = await axios.get(
+      `https://newsapi.org/v2/everything?q=weather&pageSize=10&apiKey=${API_KEY}`
+    );
+    const initialData = res.data.articles || []; // Extract articles or initialize with an empty array
+
+    return {
+      props: {
+        initialData,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching initial data:', error);
+    return {
+      props: {
+        initialData: [], // Set an empty array as initialData in case of an error
+      },
+    };
+  }
+}
+
 
 export default Searchbar
