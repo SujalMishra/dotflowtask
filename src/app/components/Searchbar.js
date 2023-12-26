@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
 import Landing from './Landing';
 import RedditData from './RedditData';
@@ -14,6 +14,8 @@ function Searchbar() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
+    useEffect(() => {
+    }, [])
     const filterByDateRange = async () => {
         setLoading(true);
         try {
