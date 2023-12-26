@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
      <Navbar />
-     <SearchBar initialData={[]}/>
+     <SearchBar/>
      <Footer/>
     </>
   )

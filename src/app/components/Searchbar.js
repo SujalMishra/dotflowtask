@@ -6,10 +6,10 @@ import RedditData from './RedditData';
 
 const API_KEY = "147288a8becf4488a4a05fe63341b2d6"
 
-function Searchbar({initialData}) {
+function Searchbar() {
   
     const [searchQuery, setSearchQuery] = useState('');
-    const [newsApiData, setNewsApiData] = useState(initialData || []);
+    const [newsApiData, setNewsApiData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -59,9 +59,11 @@ function Searchbar({initialData}) {
       setLoading(true);
       console.log('Searched word:', searchQuery);
       try {
-        const res = await axios.get(
-            `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=10&apiKey=${API_KEY}`
-          )
+        const res = await axios.get('/api/index.js', {
+          params: {
+            searchQuery: searchQuery,
+          },
+        })
           console.log(res);
           setNewsApiData(res.data.articles);
       } catch (error) {
@@ -153,28 +155,6 @@ function Searchbar({initialData}) {
   )
 }
 
-export async function getServerSideProps() {
-  try {
-    // Fetch initial data from the NewsAPI during server-side rendering
-    const res = await axios.get(
-      `https://newsapi.org/v2/everything?q=weather&pageSize=10&apiKey=${API_KEY}`
-    );
-    const initialData = res.data.articles || []; // Extract articles or initialize with an empty array
-
-    return {
-      props: {
-        initialData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching initial data:', error);
-    return {
-      props: {
-        initialData: [], // Set an empty array as initialData in case of an error
-      },
-    };
-  }
-}
 
 
 export default Searchbar
