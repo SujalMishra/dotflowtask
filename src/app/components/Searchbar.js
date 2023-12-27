@@ -15,75 +15,59 @@ function Searchbar() {
     const [endDate, setEndDate] = useState('');
 
     const filterByDateRange = async () => {
-        setLoading(true);
-        try {
-          const res = await axios.post("https://newsapi-vmbg.onrender.com/newsdate",
-          {
-           searchQuery:searchQuery,
-            startDate:startDate,
-            endDate:endDate
-          }
-         )
-          // console.log(res.data);
-           setNewsApiData(res.data);
-          
-        } catch (error) {
-            console.log(error);
-        }
-        setLoading(false);
-    }
-    
-    const sortByPublishedDate = async (e) =>{
-        setLoading(true);
-        let criteria = "publishedAt";
-
-        if(e === 1){
-            criteria = "publishedAt";
-        }else if(e === 2){
-            criteria = "relevancy";
-        }else if(e === 3){
-            criteria = "popularity";
-        }
-
-        try {
-          const res = await axios.post("https://newsapi-vmbg.onrender.com/newscriteria",
-          {
-           searchQuery:searchQuery,
-           criteria:criteria
-          }
-         )
-              // console.log(res.data);
-              setNewsApiData(res.data);
-              
-          } catch (error) {
-            console.log(error);
-          }
-        setLoading(false);
-    }
-
-    const handleInputChange = (e) => {
-      setSearchQuery(e.target.value);
-    };
-    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
       setLoading(true);
-      console.log('Searched word:', searchQuery);
       try {
-        const res = await axios.post("https://newsapi-vmbg.onrender.com/news",
-         {
-          searchQuery:searchQuery,
-        }
-        )
-          // console.log(res);
-          setNewsApiData(res.data);
-
+         const res = await axios.get(`https://newsapi.org/v2/everything?q=${searchQuery}&from=${startDate}&pageSize=10&to=${endDate}&sortBy=popularity&apiKey=${API_KEY}`)
+         console.log(res.data.articles);
+         setNewsApiData(res.data.articles);
       } catch (error) {
-        console.log(error);
+          console.log(error);
       }
-    setLoading(false);
-    setSearchQuery('');
-    };
+      setLoading(false);
+  }
+  
+  const sortByPublishedDate = async (e) =>{
+      setLoading(true);
+      let criteria = "publishedAt";
+
+      if(e === 1){
+          criteria = "publishedAt";
+      }else if(e === 2){
+          criteria = "relevancy";
+      }else if(e === 3){
+          criteria = "popularity";
+      }
+
+      try {
+          const res = await axios.get(
+              `https://newsapi.org/v2/everything?q=${searchQuery}&sortBy=${criteria}&pageSize=10&apiKey=${API_KEY}`
+            )
+            console.log(res.data.articles);
+            setNewsApiData(res.data.articles);
+        } catch (error) {
+          console.log(error);
+        }
+      setLoading(false);
+  }
+
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log('Searched word:', searchQuery);
+    try {
+      const res = await axios.get(`https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=10&apiKey=${API_KEY}`)
+        console.log(res);
+        setNewsApiData(res.data.articles);
+    } catch (error) {
+      console.log(error);
+    }
+  setLoading(false);
+  // setSearchQuery('');
+  };
     useEffect(() => {
       if (newsApiData.length > 0) {
         window.scrollBy(0, window.innerHeight);
