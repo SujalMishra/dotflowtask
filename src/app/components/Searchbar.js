@@ -18,12 +18,12 @@ function Searchbar() {
         setLoading(true);
         try {
           const res = await axios.post("https://newsapi-vmbg.onrender.com/newsdate",
-          {params:{
+          {
            searchQuery:searchQuery,
             startDate:startDate,
             endDate:endDate
           }
-         })
+         )
           // console.log(res.data);
            setNewsApiData(res.data);
           
@@ -47,11 +47,11 @@ function Searchbar() {
 
         try {
           const res = await axios.post("https://newsapi-vmbg.onrender.com/newscriteria",
-          {params:{
+          {
            searchQuery:searchQuery,
            criteria:criteria
           }
-         })
+         )
               // console.log(res.data);
               setNewsApiData(res.data);
               
@@ -71,9 +71,8 @@ function Searchbar() {
       console.log('Searched word:', searchQuery);
       try {
         const res = await axios.post("https://newsapi-vmbg.onrender.com/news",
-         {params:{
+         {
           searchQuery:searchQuery,
-         }
         }
         )
           // console.log(res);
@@ -83,7 +82,7 @@ function Searchbar() {
         console.log(error);
       }
     setLoading(false);
-    // setSearchQuery('');
+    setSearchQuery('');
     };
     useEffect(() => {
       if (newsApiData.length > 0) {
