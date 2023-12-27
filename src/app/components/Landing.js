@@ -2,8 +2,8 @@ import React from 'react'
 
 function Landing() {
   return (
-    <div className="flex justify-center items-center min-h-screen-1/2 ">
-  <div className="max-w-6xl mx-auto grid grid-cols-2 gap-4">
+    <div className="flex justify-center items-center  ">
+  {/* <div className="max-w-6xl mx-auto grid grid-cols-2 gap-4">
     
     <div className="bg-black bg-opacity-70 mt-10 rounded-lg overflow-hidden shadow-lg mr-10">
       <img src="https://www.cio.com/wp-content/uploads/2023/05/data_analytics_risk_assessment_tracking_trends_graphs_by_ipopba_gettyimages-1150397416_2400x1600-100828857-orig-7.jpg?quality=50&strip=all/400" alt="Placeholder Image" className="w-full h-72 object-cover" />
@@ -21,7 +21,7 @@ function Landing() {
         <p className="text-white"> Sort results, filter by relevance, date, source, and more to refine your data.</p>
       </div>
     </div>
-  </div>
+  </div> */}
 </div>
 
   )

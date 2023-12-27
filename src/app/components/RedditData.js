@@ -29,13 +29,13 @@ function RedditData({keyword}) {
     return (
       <>
       {
-        showData==false ? <button className="bg-black text-white px-4 py-2 ml-5 m-2 border-2 border-green-500 rounded-md hover:bg-gray-600 focus:outline-none" onClick={fetchData}>Show Reddit Data </button> : 
-      <div>
-        <button className="bg-black text-white px-4 py-2 ml-5 m-2 border-2 border-green-500 rounded-md hover:bg-gray-600 focus:outline-none" onClick={()=>setShowData(false)}>Hide Reddit Data </button>
+        showData==false ? <button className="bg-black text-white px-4 py-2 ml-12 m-3 border-2 border-blue-500 rounded-md hover:bg-gray-600 focus:outline-none" onClick={fetchData}>Show Reddit Data ... </button> : 
+      <div className='min-h-screen'>
+        <button className="bg-black text-white px-4 py-2 ml-12 m-2 border-2 border-blue-500 rounded-md hover:bg-gray-600 focus:outline-none" onClick={()=>setShowData(false)}>Hide Reddit Data </button>
       <div className="flex  flex-wrap text-white justify-center">
         
         {posts.map((post, index) => (
-          <div key={index} className="w-64 h-auto mx-4 bg-opacity-80 my-6 bg-black p-2 rounded-lg overflow-hidden shadow-md">
+          <div key={index} className="w-64 h-auto mx-4 bg-opacity-85 my-6 bg-black p-2 rounded-lg overflow-hidden shadow-md">
             <h2 className="text-xl  font-semibold">{post.data.title}</h2>
             <p className="text-white mt-2">Subreddit : r/{post.data.subreddit}</p>
             <a
