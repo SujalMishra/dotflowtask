@@ -161,7 +161,8 @@ function Searchbar() {
           <div key={index} className="mb-8 border-b border-gray-700 pb-4 hover:-translate-y-1 transition duration-300 ease-in-out bg-opacity-70">
             <h1 className="text-2xl font-bold mb-2">{e.title}</h1>
             <p className="text-gray-400">{e.description}</p>
-            <a href={e.url} className="text-blue-500 hover:underline block mb-2">URL</a>
+            <a href={e.url} className="text-blue-500 hover:underline block mb-2" target="_blank"
+              rel="noopener noreferrer">URL</a>
           </div>
         );
       })}
