@@ -4,7 +4,7 @@ import axios from 'axios';
 import Landing from './Landing';
 import RedditData from './RedditData';
 
-const API_KEY = "147288a8becf4488a4a05fe63341b2d6"
+const API_KEY = "57a5688a17844186b891369890215c89"
 
 function Searchbar() {
   
